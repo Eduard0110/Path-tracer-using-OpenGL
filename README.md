@@ -1,4 +1,4 @@
-# Path-racer-using-OpenGL
+# Path-tracer-using-OpenGL
 
 A path tracer made using OpenGL with decent UI. This path tracing works with non-polygon graphics, which means that all distance calculations are based on the position and direction of the ray.
 
