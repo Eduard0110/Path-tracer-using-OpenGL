@@ -4,8 +4,9 @@ A path tracer made using OpenGL with decent UI. This path tracing works with non
 
 ![BA0GHUpS](https://github.com/Eduard0110/Path-tracer-using-OpenGL/assets/120855690/8b3f7784-f27d-4543-887c-fae5010aa48d)
 
-For those who wants to run this project I have built the project and added it to this repository in the "Executable folder".
-Before you run just move the "images/", "shaders" and "scenes" folders to the "Executable" because those files have to be in the same directory as the the project itself for it to run.
+
+For those who wants to run this project I have built the project and added it to this repository in the "Executable folder". Before you run it just move the "images/", "shaders/" and "scenes/" folders to the "Executable/" because those files have to be in the same directory as the the .exe itself for it to run.
+
 
 Useful links that helped me with this project
 * Ray-Surface intersection functions https://iquilezles.org/articles/intersectors/
