@@ -2,7 +2,7 @@
 
 A path tracer made using OpenGL with decent UI. This path tracing works with non-polygon graphics, which means that all distance calculations are based on the position and direction of the ray.
 
-![BA0GHUpS](https://github.com/Eduard0110/Path-racer-using-OpenGL/assets/120855690/c37b3c2b-dc02-4bee-8cf4-a48dc278936d)
+![BA0GHUpS](https://github.com/Eduard0110/Path-tracer-using-OpenGL/assets/120855690/8b3f7784-f27d-4543-887c-fae5010aa48d)
 
 Useful links that helped me with this project
 * Ray-Surface intersection functions https://iquilezles.org/articles/intersectors/
