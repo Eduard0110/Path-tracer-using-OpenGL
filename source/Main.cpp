@@ -226,6 +226,7 @@ int main()
 		postProcessTexture.ActiveAndBind(GL_TEXTURE5);
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 
+		// update
 		mygui.Update();
 		glfwSwapBuffers(window);
 		glfwPollEvents();
