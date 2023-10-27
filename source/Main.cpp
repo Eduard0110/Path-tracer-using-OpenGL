@@ -28,17 +28,12 @@ std::string randomName(int);
 
 int main()
 {
-	// Initialize GLFW
 	glfwInit();
-
-	// Tell GLFW what version of OpenGL we are using 
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	int WIDTH, HEIGHT;
-	WIDTH = 1920;
-	HEIGHT = 1080;
+	int WIDTH = 1920, HEIGHT = 1080;
 	// put glfwGetPrimaryMonitor() instead of the first NULL argument to create a full screen window
 	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Ray tracing", glfwGetPrimaryMonitor(), NULL);
 	// Error check if the window fails to create
@@ -57,10 +52,8 @@ int main()
 	Shader bloomShader = Shader("shaders/bloom.frag", "shaders/default.vert");
 	Shader postProccesShader = Shader("shaders/postProcess.frag", "shaders/default.vert");
 	Shader displayShader = Shader("shaders/display.frag", "shaders/default.vert");
-
 	// create vao
 	RectVAO rectVao;
-
 	// camera
 	float cameraPos[3] = { 0.0f, 1.0f, -3.0f };
 	float cameraRotation[3] = { 0.0f, 0.0f, 0.0f };
@@ -70,8 +63,7 @@ int main()
 
 	// random seeds
 	srand(static_cast<unsigned int>(time(0))); // init random with time
-	double rSeed1[2];
-	double rSeed2[2];
+	double rSeed1[2], rSeed2[2];
 
 	// variables to track if a button was pressed in previous frame
 	GLuint keyRlastFrame = GLFW_RELEASE;
@@ -79,8 +71,6 @@ int main()
 	GLuint keyFlastFrame = GLFW_RELEASE;
 	GLuint keyTlastFrame = GLFW_RELEASE;
 	GLuint keyEscapelastFrame = GLFW_RELEASE;
-
-	int framesStill = 0; // frames without camera movement
 
 	// skybox texture
 	Skybox skybox = Skybox(WIDTH, HEIGHT);
@@ -98,6 +88,9 @@ int main()
 
 	Scene scene = Scene();
 	MyGui mygui = MyGui(&scene, &skybox, WIDTH, HEIGHT, window);
+
+	// frames without camera movement
+	int framesStill = 0;
 
 	// Create Ping Pong Framebuffers for repetitive blurring
 	GLuint pingpongFBO[2];
