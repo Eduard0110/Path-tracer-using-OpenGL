@@ -83,8 +83,6 @@ int main()
 	FrameBuffer framebuffer1(2, texture1.tex, bloomTexture.tex);
 	FrameBuffer framebuffer2(2, texture2.tex, bloomTexture.tex);
 	FrameBuffer postProcessFBuffer(1, postProcessTexture.tex, 0);
-	GLuint attachments[2] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1 };
-	glDrawBuffers(2, attachments);
 
 	Scene scene = Scene();
 	MyGui mygui = MyGui(&scene, &skybox, WIDTH, HEIGHT, window);
