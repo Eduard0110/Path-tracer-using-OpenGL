@@ -4,6 +4,7 @@ A path tracer made using OpenGL with decent UI. This path tracing works with non
 
 
 ![BA0GHUpS](https://github.com/Eduard0110/Path-tracer-using-OpenGL/assets/120855690/a2ac6c3e-0641-4897-b8e5-d5121087f831)
+![CAJZ0V4q](https://github.com/Eduard0110/Path-tracer-using-OpenGL/assets/120855690/fbcd8508-6409-437a-94cd-ba0d8986d5da)
 
 
 For those who wants to run this project I have built the project and added it to this repository in the "Executable/" folder. Before you run it just move the "images/", "shaders/" and "scenes/" folders to the "Executable/" because those files have to be in the same directory as the the .exe itself for it to run.
