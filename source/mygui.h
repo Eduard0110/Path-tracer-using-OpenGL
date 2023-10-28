@@ -10,6 +10,7 @@
 #include "scene.h"
 #include "skybox.h"
 #include "GLFW/glfw3.h"
+#include "camera.h"
 
 
 class MyGui {
@@ -74,8 +75,9 @@ public:
 	GLFWwindow* windowP;
 	Scene* scene;
 	Skybox* skybox;
+	Camera* camera;
 
-	MyGui(Scene* sceneP, Skybox* skyboxP, int WIDTH, int HEIGHT, GLFWwindow* window);
+	MyGui(Scene* sceneP, Skybox* skyboxP, Camera* camera, int WIDTH, int HEIGHT, GLFWwindow* window);
 
 	void calcFps();
 
