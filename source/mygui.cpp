@@ -2,12 +2,13 @@
 #include <format>
 
 
-MyGui::MyGui(Scene* sceneP, Skybox* skyboxP, int width, int height, GLFWwindow* window) {
+MyGui::MyGui(Scene* sceneP, Skybox* skyboxP, Camera* cameraP, int width, int height, GLFWwindow* window) {
 	WIDTH = width;
 	HEIGHT = height;
+	windowP = window;
 	scene = sceneP;
 	skybox = skyboxP;
-	windowP = window;
+	camera = cameraP;
 
 	// initialising ImGui
 	IMGUI_CHECKVERSION();
@@ -137,15 +138,19 @@ void MyGui::skyboxWindow() {
 	if (changeSkybox) {
 		if (ImGui::Begin("Skybox settings")) {
 			ImGui::Text(std::format("Current image used: {}", skybox->skybox_file_name).c_str());
-			ImGui::Text("Skybox rotation");
-			ImGui::SliderFloat("Pitch (x)", &skybox->rotation[0], 0.0f, 360.0f);
-			ImGui::SliderFloat("Yaw (y)", &skybox->rotation[1], 0.0f, 360.0f);
-			ImGui::SliderFloat("Roll (z)", &skybox->rotation[2], 0.0f, 360.0f);
+			if (ImGui::CollapsingHeader("Skybox rotation")) {
+				ImGui::SliderFloat("Pitch (x)", &skybox->rotation[0], 0.0f, 360.0f);
+				ImGui::SliderFloat("Yaw (y)", &skybox->rotation[1], 0.0f, 360.0f);
+				ImGui::SliderFloat("Roll (z)", &skybox->rotation[2], 0.0f, 360.0f);
+			}
 
-			ImGui::Checkbox("Use a colour", &useSkyboxColor);
-			if (useSkyboxColor) ImGui::ColorEdit3("Sky color", skybox->col);
+			if (ImGui::CollapsingHeader("Use just a color")) {
+				ImGui::Checkbox("Use a colour", &useSkyboxColor);
+				if (useSkyboxColor) ImGui::ColorEdit3("Sky color", skybox->col);
+			}
 
-			ImGui::Text("All images");
+			ImGui::Spacing();
+			ImGui::Text("All images in 'images/skybox'");
 
 			ImVec2 windowSize = ImGui::GetWindowContentRegionMax();
 			for (const auto& entry : std::filesystem::directory_iterator("images/skybox/")) {
@@ -259,23 +264,46 @@ void MyGui::cameraSettingsWindow() {
 	if (ImGui::Begin("Camera settings")) {
 		ImVec2 windowSize = ImGui::GetWindowContentRegionMax();
 		ImVec2 buttonSize = ImVec2(windowSize.x - 8, 30);
-		ImGui::Text("Number of reflections");
-		ImGui::SliderInt("Render mode ", &MAX_REFLECTIONS_RENDER_MODE, 1, 30);
-		ImGui::SliderInt("Preview mode", &MAX_REFLECTIONS_PREVIEW_MODE, 1, 30);
-		ImGui::Text("Number of samples");
-		ImGui::SliderInt("Redner mode", &NUMBER_OF_SAMPLES_RENDER_MODE, 1, 30);
-		ImGui::SliderInt("Preview mode ", &NUMBER_OF_SAMPLES_PREVIEW_MODE, 1, 30);
-		ImGui::Text("Lens settings");
-		ImGui::SliderFloat("Focus distance", &focusDistance, 0.0, 30.0);
-		ImGui::SliderFloat("Aperture size", &apertureSize, 0.0, 1.0);
-		ImGui::Text("Color multiplier when reached maximum reflections");
-		ImGui::SliderFloat("Color Multiplier", &colorMultiplierWhenReachedMaxRef, 0.0, 1.0);
-		ImGui::SliderFloat("Zoom", &zoom, 0.1, 2.0);
+
+		if (ImGui::CollapsingHeader("Path tracing settings")) {
+			ImGui::Text("Number of reflections");
+			ImGui::SliderInt("Render mode ", &MAX_REFLECTIONS_RENDER_MODE, 1, 30);
+			ImGui::SliderInt("Preview mode", &MAX_REFLECTIONS_PREVIEW_MODE, 1, 30);
+			ImGui::Text("Number of samples");
+			ImGui::SliderInt("Redner mode", &NUMBER_OF_SAMPLES_RENDER_MODE, 1, 30);
+			ImGui::SliderInt("Preview mode ", &NUMBER_OF_SAMPLES_PREVIEW_MODE, 1, 30);
+			ImGui::Text("Color multiplier when reached max relfections");
+			ImGui::SliderFloat("Multiplier", &colorMultiplierWhenReachedMaxRef, 0.0, 1.0);
+		}
+		ImGui::Spacing();
+		if (ImGui::CollapsingHeader("Camera position and direction")) {
+			ImGui::Text("Position");
+			ImGui::SliderFloat("X", &camera->Pos[0], -10.0f, 10.0f);
+			ImGui::SliderFloat("Y", &camera->Pos[1], -10.0f, 10.0f);
+			ImGui::SliderFloat("Z", &camera->Pos[2], -10.0f, 10.0f);
+			ImGui::Text("Direction");
+			ImGui::SliderFloat("Pitch (X)", &camera->Rot[0], -360.0f, 360.0f);
+			ImGui::SliderFloat("Yaw   (Y)", &camera->Rot[1], -360.0f, 360.0f);
+			ImGui::SliderFloat("Roll  (Z)", &camera->Rot[2], -360.0f, 360.0f);
+			ImGui::Text("Other");
+			ImGui::SliderFloat("Speed", &camera->Speed, 0.0f, 5.0f);
+			ImGui::SliderFloat("Mouse sensitivity", &camera->Sensitivity, 0.1f, 5.0f);
+		}
+		ImGui::Spacing();
+		if (ImGui::CollapsingHeader("Camera settings")) {
+			ImGui::Text("Lens settings");
+			ImGui::SliderFloat("Focus distance", &focusDistance, 0.0, 30.0);
+			ImGui::SliderFloat("Aperture size", &apertureSize, 0.0, 1.0);
+			ImGui::SliderFloat("Zoom", &zoom, 0.1, 2.0);
+		}
+		ImGui::Spacing();
 		ImGui::Checkbox("Show normals", &showNormals);
+		ImGui::Checkbox("Camera movement", &isMouseControl);
 		ImGui::Checkbox("Render mode  ", &renderMode);
 		ImGui::Checkbox("On constant update", &onConstantUpdate);
 		if (ImGui::Checkbox("v-Sync", &vSync)) glfwSwapInterval(vSync);;
 		// change skybox
+		ImGui::Spacing();
 		if (ImGui::Button("Skybox settings", buttonSize)) changeSkybox = !changeSkybox;
 		// change post process settings
 		if (ImGui::Button("Post process settings", buttonSize)) postProcessSettings = !postProcessSettings;
