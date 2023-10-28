@@ -85,7 +85,7 @@ int main()
 	FrameBuffer postProcessFBuffer(1, postProcessTexture.tex, 0);
 
 	Scene scene = Scene();
-	MyGui mygui = MyGui(&scene, &skybox, WIDTH, HEIGHT, window);
+	MyGui mygui = MyGui(&scene, &skybox, &camera, WIDTH, HEIGHT, window);
 
 	// frames without camera movement
 	int framesStill = 0;
@@ -111,7 +111,7 @@ int main()
 
 	glfwSwapInterval(mygui.vSync);
 	while (!glfwWindowShouldClose(window))
-	{	
+	{
 		framesStill++;
 		if (mygui.isMouseControl) { camera.CheckForUpdate(framesStill); camera.Update(); }
 
@@ -216,7 +216,6 @@ int main()
 		displayShader.U2f("resolution", WIDTH, HEIGHT);
 		postProcessTexture.ActiveAndBind(GL_TEXTURE5);
 		glDrawArrays(GL_TRIANGLES, 0, 6);
-
 		// update
 		mygui.Update();
 		glfwSwapBuffers(window);
@@ -238,7 +237,7 @@ int main()
 			{
 				mygui.showMessage = true;
 				std::string path = "images/screenshots/" + randomName(8) + ".png";
-				saveTextureAsImage(window, postProcessTexture.tex, WIDTH, HEIGHT, path.c_str());
+				saveTextureAsImage(window, bloomTexture.tex, WIDTH, HEIGHT, path.c_str());
 			}
 		}
 	}
