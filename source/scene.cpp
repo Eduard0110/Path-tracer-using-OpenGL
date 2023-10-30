@@ -5,7 +5,7 @@
 void Scene::convertTo1D() {
 	// x, y, z, r, g, b, type, radius, cubeSize, isLight, reflectivity, refract, percentSpecular, roughness powerOfLight rotationTransform
 	// 1  2  3  4  5  6    7     8     9 10 11     12         13          14          15             16       17            18 19 20
-	float array2D[MAX_OBJECTS][20];
+	float array2D[MAX_OBJECTS][ELMENTS_IN_1OBJ];
 	for (int i = 0; i < MAX_OBJECTS; i++) {
 		array2D[i][0] = objects[i].pos[0];
 		array2D[i][1] = objects[i].pos[1];
@@ -32,17 +32,22 @@ void Scene::convertTo1D() {
 		array2D[i][17] = objects[i].rot[0];
 		array2D[i][18] = objects[i].rot[1];
 		array2D[i][19] = objects[i].rot[2];
+
+		array2D[i][20] = objects[i].specularColour[0];
+		array2D[i][21] = objects[i].specularColour[1];
+		array2D[i][22] = objects[i].specularColour[2];
 	}
+
 	for (int i = 0; i < MAX_OBJECTS; ++i) {
-		for (int j = 0; j < 20; ++j) {
-			sceneData1D[i * 20 + j] = array2D[i][j];
+		for (int j = 0; j < ELMENTS_IN_1OBJ; ++j) {
+			sceneData1D[i * ELMENTS_IN_1OBJ + j] = array2D[i][j];
 		}
 	}
 }
 
 void Scene::updateObjectsFrom1D() {
 	for (int i = 0; i < MAX_OBJECTS; ++i) {
-		int index = i * 20; // Calculate the starting index for each object in the 1D array
+		int index = i * ELMENTS_IN_1OBJ; // Calculate the starting index for each object in the 1D array
 
 		objects[i].pos[0] = sceneData1D[index + 0];
 		objects[i].pos[1] = sceneData1D[index + 1];
@@ -69,6 +74,10 @@ void Scene::updateObjectsFrom1D() {
 		objects[i].rot[0] = sceneData1D[index + 17];
 		objects[i].rot[1] = sceneData1D[index + 18];
 		objects[i].rot[2] = sceneData1D[index + 19];
+
+		objects[i].specularColour[0] = sceneData1D[index + 20];
+		objects[i].specularColour[1] = sceneData1D[index + 21];
+		objects[i].specularColour[2] = sceneData1D[index + 22];
 	}
 }
 
@@ -116,7 +125,7 @@ void Scene::saveInFile(const char* dirName) {
 
 void Scene::readFromAfile(const char* dirName) {
 	// Read the array from the file and store it in sceneData1D
-	const int maxSize = MAX_OBJECTS * 23;
+	const int maxSize = MAX_OBJECTS * ELMENTS_IN_1OBJ;
 	int loadedSize = 0;
 	std::ifstream ArrayFile1d(std::format("{}/data.txt", dirName).c_str());
 	if (!ArrayFile1d) std::cerr << "Error opening file for reading." << std::endl;
@@ -135,5 +144,4 @@ void Scene::readFromAfile(const char* dirName) {
 		objects[count].name = line;
 		count++;
 	}
-
 }
