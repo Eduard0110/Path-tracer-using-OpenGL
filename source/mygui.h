@@ -22,7 +22,7 @@ public:
 	int MAX_REFLECTIONS_PREVIEW_MODE = 1;
 	int NUMBER_OF_SAMPLES_PREVIEW_MODE = 1;
 
-	float colorMultiplierWhenReachedMaxRef = 1.0f;
+	float colourMultiplier = 1.0f;  // colour multiplier when the a ray has reaches the maximum number of reflections
 	float focusDistance = 3.0f;
 	float apertureSize = 0.0f;
 	float zoom = 1.0f;
@@ -58,15 +58,15 @@ public:
 	bool isSaveFile = false;
 	bool isReadFile = false;
 	bool isMouseControl = true;
-	bool useSkyboxColor = false;
+	bool useSkyboxColour = false;
 	const char* items[3] = { "Sphere", "Cube", "Plane" };
 	const char* materials[3] = { "Matte - Specular", "Light source", "Lens" };
 	int selectedItemFromCombo = 0;
 	int nextObjectToAdd = 0;
 	int selectedObjectFromCollection = 0;
 	int selectedMaterialFromCombo = 0;
-	char inputBuffer[256] = "";
-	char inputBufferSaveFile[256] = "";
+	char inputBuffer[20] = "";  // buffer for an object name
+	char inputBufferSaveFile[20] = "";  // buffer for a scene name
 	int WIDTH, HEIGHT, fps, frameCount = 0;
 
 	// for FPS measurements
