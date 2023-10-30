@@ -148,14 +148,14 @@ int main()
 		defaultShader.U1f("focusDistance", mygui.focusDistance);
 		defaultShader.U1f("apertureSize", mygui.apertureSize);
 		defaultShader.U1f("zoom", mygui.zoom);
-		defaultShader.U1f("colorMultiplierWhenReachedMaxRef", mygui.colorMultiplierWhenReachedMaxRef);
+		defaultShader.U1f("colorMultiplierWhenReachedMaxRef", mygui.colourMultiplier);
 		defaultShader.U1i("showNormals", mygui.showNormals);
 		if (!mygui.renderMode) defaultShader.U1fv("objects", MAX_OBJECTS * 20, scene.sceneData1D);
 		defaultShader.U3f("skyboxRotation", mygui.skybox->rotation[0], mygui.skybox->rotation[1], mygui.skybox->rotation[2]);
 		defaultShader.U1i("planeGrid", mygui.planeGrid);
 		defaultShader.U3f("gridCol2", mygui.gridCol2[0], mygui.gridCol2[1], mygui.gridCol2[2]);
 		defaultShader.U1f("tileSize", mygui.tileSize);
-		defaultShader.U1i("useSkyboxColor", mygui.useSkyboxColor);
+		defaultShader.U1i("useSkyboxColor", mygui.useSkyboxColour);
 		defaultShader.U3f("skyboxColor", skybox.col[0], skybox.col[1], skybox.col[2]);
 		defaultShader.U1i("skybox", 0);
 		defaultShader.U1i("tex", 1);
@@ -237,7 +237,7 @@ int main()
 			{
 				mygui.showMessage = true;
 				std::string path = "images/screenshots/" + randomName(8) + ".png";
-				saveTextureAsImage(window, bloomTexture.tex, WIDTH, HEIGHT, path.c_str());
+				saveTextureAsImage(window, lastTexture.tex, WIDTH, HEIGHT, path.c_str());
 			}
 		}
 	}
