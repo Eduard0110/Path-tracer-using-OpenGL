@@ -14,20 +14,13 @@ public:
 
     // material properties
     float colour[3] = { 1.0f, 1.0f, 1.0f };
+    float specularColour[3] = { 1.0f, 1.0f, 1.0f };
     float isLight = 0.0f;
     float powerOfLight = 1.0f;
     float reflectivity = 0.0f;
     float refractionIndex = -1.0f;
     float percentSpecular = 0.0f;
     float roughness = 0.0f;
-
-    void set_col(float, float, float);
-
-    void set_pos(float, float, float);
-
-    void set_rot(float, float, float);
-
-    void set_cubeSize(float, float, float);
 
     void set_default_settings(int);
 
