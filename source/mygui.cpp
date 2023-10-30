@@ -145,8 +145,8 @@ void MyGui::skyboxWindow() {
 			}
 
 			if (ImGui::CollapsingHeader("Use just a color")) {
-				ImGui::Checkbox("Use a colour", &useSkyboxColor);
-				if (useSkyboxColor) ImGui::ColorEdit3("Sky color", skybox->col);
+				ImGui::Checkbox("Use a colour", &useSkyboxColour);
+				if (useSkyboxColour) ImGui::ColorEdit3("Sky color", skybox->col);
 			}
 
 			ImGui::Spacing();
@@ -245,6 +245,7 @@ void MyGui::objectPropertiesWindow() {
 				ImGui::ColorEdit3("Colour 1", scene->objects[selectedObjectFromCollection].colour);
 				ImGui::ColorEdit3("Colour 2", gridCol2);
 			} else ImGui::ColorEdit3("Colour", scene->objects[selectedObjectFromCollection].colour);
+			ImGui::ColorEdit3("Specular colour", scene->objects[selectedObjectFromCollection].specularColour);
 			// delete button
 			if (ImGui::Button("Delete")) {
 				scene->objects[selectedObjectFromCollection].set_default_settingsALL();
@@ -273,7 +274,7 @@ void MyGui::cameraSettingsWindow() {
 			ImGui::SliderInt("Redner mode", &NUMBER_OF_SAMPLES_RENDER_MODE, 1, 30);
 			ImGui::SliderInt("Preview mode ", &NUMBER_OF_SAMPLES_PREVIEW_MODE, 1, 30);
 			ImGui::Text("Color multiplier when reached max relfections");
-			ImGui::SliderFloat("Multiplier", &colorMultiplierWhenReachedMaxRef, 0.0, 1.0);
+			ImGui::SliderFloat("Multiplier", &colourMultiplier, 0.0, 1.0);
 		}
 		ImGui::Spacing();
 		if (ImGui::CollapsingHeader("Camera position and direction")) {
