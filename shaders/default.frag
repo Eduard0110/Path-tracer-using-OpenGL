@@ -24,9 +24,11 @@ uniform vec3 gridCol2;
 uniform float tileSize;
 uniform bool useSkyboxColor;
 uniform vec3 skyboxColor;
-
-uniform float objects[50*20];
 uniform float treshHoldIntensity;
+
+const int MAX_OBJECTS = 30;
+const int ELEMENTS_IN_1OBJ = 23;
+uniform float objects[MAX_OBJECTS*ELEMENTS_IN_1OBJ];
 
 #define MAX_DIST 1000.0
 #define PI 3.141592
@@ -34,7 +36,6 @@ uniform float treshHoldIntensity;
 uvec4 R_STATE;
 float degree = 2.0 * PI / 360.0;
 vec3 bloomWeights = vec3(0.2126, 0.7152, 0.0722);
-
 
 struct Sdf {
     float d;
@@ -46,6 +47,8 @@ struct Sdf {
 struct Ray {
     Sdf sdf;
     vec3 col;
+    vec3 specularCol;
+    vec3 pos;
     float percentSpecular;
     float roughness;
     float refractionIndex;
@@ -208,15 +211,18 @@ float fresnelReflectAmount (vec3 rd, vec3 normal, float n1, float n2, float obje
 Ray GetClosestObj(vec3 ro, vec3 rd) {
     Ray minIt;
     minIt.sdf.d = MAX_DIST;
-    // x, y, z, r, g, b, type, radius, cubeSize, isLigjt, reflectivity, refract, specularPercent, roughtness, powerOfLight rotationTransform
-	// 1  2  3  4  5  6    7     8     9 10 11     12         13          14          15             16            17           18 19 20
-    for (int i=0; i<20; i++){
-        if (objects[6 + i * 20] != 0.0){
+    // x, y, z, r, g, b, type, radius, cubeSize, isLigjt, reflectivity, refract, specularPercent, roughtness, powerOfLight, rotation, specularColour
+	// 1  2  3  4  5  6    7     8     9 10 11     12         13          14          15             16            17       18 19 20     21 22 23
+    for (int i=0; i<MAX_OBJECTS; i++){
+        if (objects[6 + i * ELEMENTS_IN_1OBJ] != 0.0){
             Ray object;
-            int ind = i * 20;
+            int ind = i * ELEMENTS_IN_1OBJ;
 
+            // common properties
             vec3 pos = vec3(objects[ind], objects[1 + ind], objects[2 + ind]);
             object.col = vec3(objects[3 + ind], objects[4 + ind], objects[5 + ind]);
+            object.specularCol = vec3(objects[20 + ind], objects[21 + ind], objects[22 + ind]);
+
             // choosing the material
             object.isLight = objects[11 + ind];
             if (object.isLight == 1.0) object.col *= objects[16 + ind];
@@ -248,6 +254,7 @@ Ray GetClosestObj(vec3 ro, vec3 rd) {
                 object.type = 3.0;
             }
             minIt = Min(minIt, object);
+            minIt.pos = pos;
         }
     }
 
@@ -272,20 +279,26 @@ Ray CastRay(inout vec3 ro, inout vec3 rd){
         
     // refraction
     if (minIt.refractionIndex != -1.0 && !showNormals) {
-        ro += rd * (minIt.sdf.d - 0.001);
+        ro += rd * (minIt.sdf.d - 0.001);  // move ro to the hit pos
 
+        // calculate how much light is reflected
         float rFloat = fract(random());
         float fresnel = fresnelReflectAmount(rd, minIt.sdf.n, 1.01, minIt.refractionIndex, minIt.reflectivity);
         if (rFloat < fresnel * fresnel){
+            minIt.col = minIt.specularCol;
             rd = reflect(rd, minIt.sdf.n);
             return minIt;
         }
 
+        // refract the rd
         rd = refract(rd, minIt.sdf.n, 1.01 / minIt.refractionIndex);
             
+        // get the second distance, the hit we cant see
         minIt = GetClosestObj(ro, rd);
 
+        // and move the ro there
         ro += rd * (minIt.sdf.d2 + 0.001);
+        // refrect the distance again as light isrefracted twice, both when enters the glass and leaves it
         rd = refract(rd, -minIt.sdf.n2, minIt.refractionIndex / 1.01);
 
         return minIt;
@@ -302,11 +315,12 @@ Ray CastRay(inout vec3 ro, inout vec3 rd){
     vec3 rOnSphere = randomOnSphere(); // random ray direction
     bool doSpecular = fract(random()) < minIt.percentSpecular;
 
+    //  if specular reflection
     if (doSpecular){
         vec3 specular = reflect(rd, minIt.sdf.n);
         vec3 diffuse = normalize(rOnSphere * dot(rOnSphere, minIt.sdf.n));
         rd = mix(specular, diffuse, minIt.roughness);
-        //minIt.col = vec3(1); // specular colour
+        minIt.col = minIt.specularCol; // specular colour
     } else {
         rd = normalize(rOnSphere * dot(rOnSphere, minIt.sdf.n));
     }
