@@ -245,7 +245,7 @@ void MyGui::objectPropertiesWindow() {
 				ImGui::ColorEdit3("Colour 1", scene->objects[selectedObjectFromCollection].colour);
 				ImGui::ColorEdit3("Colour 2", gridCol2);
 			} else ImGui::ColorEdit3("Colour", scene->objects[selectedObjectFromCollection].colour);
-			ImGui::ColorEdit3("Specular colour", scene->objects[selectedObjectFromCollection].specularColour);
+			if (items[selectedItemFromCombo] != "Plane") ImGui::ColorEdit3("Specular colour", scene->objects[selectedObjectFromCollection].specularColour);
 			// delete button
 			if (ImGui::Button("Delete")) {
 				scene->objects[selectedObjectFromCollection].set_default_settingsALL();
