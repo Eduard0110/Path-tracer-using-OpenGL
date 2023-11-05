@@ -8,7 +8,7 @@ A path tracer made using OpenGL with decent UI. This path tracing works with non
 ![rsu6tCdx](https://github.com/Eduard0110/Path-tracer-using-OpenGL/assets/120855690/f21eb4d4-a7df-4af5-8363-63ea44306c0d)
 
 
-For those who wants to run this project I have built the project and added it to this repository in the "Executable/" folder. Before you run it just move the "images/", "shaders/" and "scenes/" folders to the "Executable/" because those files have to be in the same directory as the the .exe itself for it to run.
+For those who wants to run this project I have built the project and added it to this repository in the "Executable/" folder.
 
 
 Features
