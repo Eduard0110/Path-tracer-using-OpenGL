@@ -320,7 +320,7 @@ Ray CastRay(inout vec3 ro, inout vec3 rd){
         vec3 specular = reflect(rd, minIt.sdf.n);
         vec3 diffuse = normalize(rOnSphere * dot(rOnSphere, minIt.sdf.n));
         rd = mix(specular, diffuse, minIt.roughness);
-        if (object.type != 3.0) minIt.col = minIt.specularCol; // specular colour
+        if (minIt.type != 3.0) minIt.col = minIt.specularCol; // specular colour
     } else {
         rd = normalize(rOnSphere * dot(rOnSphere, minIt.sdf.n));
     }
