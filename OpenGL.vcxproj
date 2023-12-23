@@ -26,13 +26,13 @@
     <None Include="shaders\postProcess.frag" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Lybraries\include\imgui\imgui.cpp" />
-    <ClCompile Include="Lybraries\include\imgui\imgui_demo.cpp" />
-    <ClCompile Include="Lybraries\include\imgui\imgui_draw.cpp" />
-    <ClCompile Include="Lybraries\include\imgui\imgui_impl_glfw.cpp" />
-    <ClCompile Include="Lybraries\include\imgui\imgui_impl_opengl3.cpp" />
-    <ClCompile Include="Lybraries\include\imgui\imgui_tables.cpp" />
-    <ClCompile Include="Lybraries\include\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="Libraries\include\imgui\imgui.cpp" />
+    <ClCompile Include="Libraries\include\imgui\imgui_demo.cpp" />
+    <ClCompile Include="Libraries\include\imgui\imgui_draw.cpp" />
+    <ClCompile Include="Libraries\include\imgui\imgui_impl_glfw.cpp" />
+    <ClCompile Include="Libraries\include\imgui\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="Libraries\include\imgui\imgui_tables.cpp" />
+    <ClCompile Include="Libraries\include\imgui\imgui_widgets.cpp" />
     <ClCompile Include="source\camera.cpp" />
     <ClCompile Include="source\framebuffer.cpp" />
     <ClCompile Include="source\glad.c" />
@@ -47,15 +47,15 @@
     <ClCompile Include="source\vao.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Lybraries\include\imgui\imconfig.h" />
-    <ClInclude Include="Lybraries\include\imgui\imgui.h" />
-    <ClInclude Include="Lybraries\include\imgui\imgui_impl_glfw.h" />
-    <ClInclude Include="Lybraries\include\imgui\imgui_impl_opengl3.h" />
-    <ClInclude Include="Lybraries\include\imgui\imgui_impl_opengl3_loader.h" />
-    <ClInclude Include="Lybraries\include\imgui\imgui_internal.h" />
-    <ClInclude Include="Lybraries\include\imgui\imstb_rectpack.h" />
-    <ClInclude Include="Lybraries\include\imgui\imstb_textedit.h" />
-    <ClInclude Include="Lybraries\include\imgui\imstb_truetype.h" />
+    <ClInclude Include="Libraries\include\imgui\imconfig.h" />
+    <ClInclude Include="Libraries\include\imgui\imgui.h" />
+    <ClInclude Include="Libraries\include\imgui\imgui_impl_glfw.h" />
+    <ClInclude Include="Libraries\include\imgui\imgui_impl_opengl3.h" />
+    <ClInclude Include="Libraries\include\imgui\imgui_impl_opengl3_loader.h" />
+    <ClInclude Include="Libraries\include\imgui\imgui_internal.h" />
+    <ClInclude Include="Libraries\include\imgui\imstb_rectpack.h" />
+    <ClInclude Include="Libraries\include\imgui\imstb_textedit.h" />
+    <ClInclude Include="Libraries\include\imgui\imstb_truetype.h" />
     <ClInclude Include="source\camera.h" />
     <ClInclude Include="source\framebuffer.h" />
     <ClInclude Include="source\mygui.h" />
@@ -119,20 +119,20 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\Eduard Holonko\source\repos\OpenGL\Lybraries\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Eduard Holonko\source\repos\OpenGL\Lybraries\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)Libraries\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)Libraries\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Users\Eduard Holonko\source\repos\OpenGL\Lybraries\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Eduard Holonko\source\repos\OpenGL\Lybraries\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)Libraries\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)Libraries\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>C:\Users\Eduard Holonko\source\repos\OpenGL\Lybraries\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Eduard Holonko\source\repos\OpenGL\Lybraries\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)Libraries\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)Libraries\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>C:\Users\Eduard Holonko\source\repos\OpenGL\Lybraries\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Eduard Holonko\source\repos\OpenGL\Lybraries\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)Libraries\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)Libraries\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
