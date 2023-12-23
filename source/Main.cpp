@@ -26,6 +26,7 @@ void printOpenGLInfo();
 bool checkKey(GLuint, GLuint&, GLFWwindow*);
 std::string randomName(int);
 
+
 int main()
 {
 	glfwInit();
@@ -33,9 +34,13 @@ int main()
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	int WIDTH = 1920, HEIGHT = 1080;
+	// get the resolution of the monitor
+	const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+	int WIDTH = mode->width;
+	int HEIGHT = mode->height;
+
 	// put glfwGetPrimaryMonitor() instead of the first NULL argument to create a full screen window
-	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Ray tracing", glfwGetPrimaryMonitor(), NULL);
+	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Ray tracing", NULL, NULL);
 	// Error check if the window fails to create
 	if (window == NULL) {
 		std::cout << "Failed to create GLFW window" << std::endl;
