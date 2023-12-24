@@ -40,7 +40,7 @@ int main()
 	int HEIGHT = mode->height;
 
 	// put glfwGetPrimaryMonitor() instead of the first NULL argument to create a full screen window
-	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Ray tracing", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Ray tracing", glfwGetPrimaryMonitor(), NULL);
 	// Error check if the window fails to create
 	if (window == NULL) {
 		std::cout << "Failed to create GLFW window" << std::endl;
@@ -53,10 +53,10 @@ int main()
 	printOpenGLInfo();
 
 	// create shaders
-	Shader defaultShader = Shader("shaders/default.frag", "shaders/default.vert");
-	Shader bloomShader = Shader("shaders/bloom.frag", "shaders/default.vert");
-	Shader postProccesShader = Shader("shaders/postProcess.frag", "shaders/default.vert");
-	Shader displayShader = Shader("shaders/display.frag", "shaders/default.vert");
+	Shader defaultShader("shaders/default.frag", "shaders/default.vert");
+	Shader bloomShader("shaders/bloom.frag", "shaders/default.vert");
+	Shader postProccesShader("shaders/postProcess.frag", "shaders/default.vert");
+	Shader displayShader("shaders/display.frag", "shaders/default.vert");
 	// create vao
 	RectVAO rectVao;
 	// camera
@@ -64,7 +64,7 @@ int main()
 	float cameraRotation[3] = { 0.0f, 0.0f, 0.0f };
 	float cameraSpeed = 0.1f;
 	float mouseSensitivity = 1.0f;
-	Camera camera = Camera(window, cameraPos, cameraRotation, cameraSpeed, mouseSensitivity);
+	Camera camera(window, cameraPos, cameraRotation, cameraSpeed, mouseSensitivity);
 
 	// random seeds
 	srand(static_cast<unsigned int>(time(0))); // init random with time
@@ -89,8 +89,8 @@ int main()
 	FrameBuffer framebuffer2(2, texture2.tex, bloomTexture.tex);
 	FrameBuffer postProcessFBuffer(1, postProcessTexture.tex, 0);
 
-	Scene scene = Scene();
-	MyGui mygui = MyGui(&scene, &skybox, &camera, WIDTH, HEIGHT, window);
+	Scene scene;
+	MyGui mygui(&scene, &skybox, &camera, WIDTH, HEIGHT, window);
 
 	// frames without camera movement
 	int framesStill = 0;
