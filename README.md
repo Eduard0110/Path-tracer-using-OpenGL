@@ -12,6 +12,7 @@ A path tracer made using OpenGL with decent UI. This path tracing works with non
 ##### Unix
 need to install ``glfw`` using your package manager 
 - ``sh build.sh``
+- run with ``./path_tracer``
 
 Features
 * 3 different types of object - Cube, Sphere and Plane
