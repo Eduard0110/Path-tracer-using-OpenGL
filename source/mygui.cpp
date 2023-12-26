@@ -1,6 +1,8 @@
 #include "mygui.h"
 #include <format>
-
+#if !defined(_MSC_VER)
+    auto strcpy_s = strcpy;
+#endif 
 
 MyGui::MyGui(Scene* sceneP, Skybox* skyboxP, Camera* cameraP, int width, int height, GLFWwindow* window) {
 	WIDTH = width;
