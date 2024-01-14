@@ -129,7 +129,7 @@ int main()
 		ImGui::NewFrame();
 
 		Texture currentTexture = (framesStill % 2 == 1) ? texture1 : texture2;
-		Texture lastTexture = (framesStill % 2 == 2) ? texture1 : texture2;
+		Texture lastTexture = (framesStill % 2 == 0) ? texture1 : texture2;
 		FrameBuffer currentFramebuffer = (framesStill % 2 == 1) ? framebuffer2 : framebuffer1;
 
 		glBindFramebuffer(GL_FRAMEBUFFER, currentFramebuffer.buf);
