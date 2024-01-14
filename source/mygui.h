@@ -23,8 +23,8 @@ public:
 	int NUMBER_OF_SAMPLES_PREVIEW_MODE = 1;
 
 	float colourMultiplier = 1.0f;  // colour multiplier when the a ray has reaches the maximum number of reflections
-	float focusDistance = 3.0f;
-	float apertureSize = 0.0f;
+	float focusDistance = 5.0f;
+	float apertureSize = 0.1f;
 	float zoom = 1.0f;
 
 	bool showNormals = false;

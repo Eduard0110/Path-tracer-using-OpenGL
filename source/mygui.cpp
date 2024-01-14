@@ -1,6 +1,4 @@
 #include "mygui.h"
-#include <format>
-
 
 MyGui::MyGui(Scene* sceneP, Skybox* skyboxP, Camera* cameraP, int width, int height, GLFWwindow* window) {
 	WIDTH = width;
@@ -148,6 +146,8 @@ void MyGui::skyboxWindow() {
 				ImGui::Checkbox("Use a colour", &useSkyboxColour);
 				if (useSkyboxColour) ImGui::ColorEdit3("Sky color", skybox->col);
 			}
+			ImGui::Text("Highest colour value");
+			ImGui::SliderFloat(" ", &skybox->highestColValue, 1.0f, 100.0f);
 
 			ImGui::Spacing();
 			ImGui::Text("All images in 'images/skybox'");

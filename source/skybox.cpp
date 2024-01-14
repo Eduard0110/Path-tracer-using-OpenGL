@@ -2,7 +2,7 @@
 
 
 Skybox::Skybox(int WIDTH, int HEIGHT) {
-	float* newBytes = stbi_loadf("images/skybox/small_cave_2k.hdr", &widthImg, &heightImg, &numColCh, 0);
+	float* newBytes = stbi_loadf(std::format("images/skybox/{}", skybox_file_name).c_str(), &widthImg, &heightImg, &numColCh, 0);
 	glGenTextures(1, &Texture);
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, Texture);

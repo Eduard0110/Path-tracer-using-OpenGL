@@ -25,6 +25,7 @@ uniform float tileSize;
 uniform bool useSkyboxColor;
 uniform vec3 skyboxColor;
 uniform float treshHoldIntensity;
+uniform float highestColValue;
 
 const int MAX_OBJECTS = 30;
 const int ELEMENTS_IN_1OBJ = 23;
@@ -131,6 +132,8 @@ vec3 applySkyBox(vec3 rd, sampler2D skybox) {
     st.y = 0.5 - asin(rd.y) / PI;
     // Sample the cube map using the texture coordinates
     vec3 col = texture(skybox, st).rgb;
+
+    col = clamp(col, 0.0, highestColValue);
 
     return col;
 }
