@@ -28,7 +28,3 @@ Useful links that helped me with this project
 * Ray-Surface intersection functions https://iquilezles.org/articles/intersectors/
 * Cool article about path tracing https://blog.demofox.org/2016/09/21/path-tracing-getting-started-with-diffuse-and-emissive/
 * And one more https://blog.demofox.org/2017/01/09/raytracing-reflection-refraction-fresnel-total-internal-reflection-and-beers-law/
-
-
-Things to work on
-* In real life, materials like lenses (glass) tend to absorb a portion of light when the ray goes through them. The amount of light absorbed by the lens is proportional to the distance traveled, and that is called the Beer's law. In my path tracer, I haven't implemented this yes, but when I get a chance I will
