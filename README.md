@@ -7,6 +7,13 @@ A path tracer made using OpenGL with decent UI. This path tracing works with non
 ![CAJZ0V4q](https://github.com/Eduard0110/Path-tracer-using-OpenGL/assets/120855690/fbcd8508-6409-437a-94cd-ba0d8986d5da)
 ![rsu6tCdx](https://github.com/Eduard0110/Path-tracer-using-OpenGL/assets/120855690/f21eb4d4-a7df-4af5-8363-63ea44306c0d)
 
+#### Compilation
+
+##### Unix
+need to install ``glfw`` using your package manager 
+- ``sh build.sh``
+- run with ``./path_tracer``
+
 Features
 * 3 different types of object - Cube, Sphere and Plane
 * 3 types of materials - Rougth - Metalic, Lens, Light source (emissive material)
